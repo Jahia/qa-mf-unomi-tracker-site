@@ -1,0 +1,71 @@
+
+<!--
+ ~ Licensed to the Apache Software Foundation (ASF) under one or more
+ ~ contributor license agreements. See the NOTICE file distributed with
+ ~ this work for additional information regarding copyright ownership.
+ ~ The ASF licenses this file to You under the Apache License, Version 2.0
+ ~ (the "License"); you may not use this file except in compliance with
+ ~ the License. You may obtain a copy of the License at
+ ~
+ ~ http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License.
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Test</title>
+        
+        <meta name="Date-Revision-yyyymmdd" content="20180919"/>
+        <meta http-equiv="Content-Language" content="en"/>
+        
+        <script type="text/javascript">
+            var unomiOption = {
+                scope: 'unomiTrackerSite',
+                url: 'https://rangers.jahia.com'
+            };
+        window.unomiTracker||(window.unomiTracker={}),function(){function e(e){for(unomiTracker.initialize({"Apache Unomi":unomiOption});n.length>0;){var r=n.shift(),t=r.shift();unomiTracker[t]&&unomiTracker[t].apply(unomiTracker,r)}}for(var n=[],r=["trackSubmit","trackClick","trackLink","trackForm","initialize","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","personalize"],t=0;t<r.length;t++){var i=r[t];window.unomiTracker[i]=function(e){return function(){var r=Array.prototype.slice.call(arguments);return r.unshift(e),n.push(r),window.unomiTracker}}(i)}unomiTracker.load=function(){var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=unomiOption.url+"/tracker/unomi-tracker.min.js",n.addEventListener?n.addEventListener("load",function(n){"function"==typeof e&&e(n)},!1):n.onreadystatechange=function(){"complete"!==this.readyState&&"loaded"!==this.readyState||e(window.event)};var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(n,r)},document.addEventListener("DOMContentLoaded",unomiTracker.load),unomiTracker.page()}();
+            </script>
+    </head>
+    <body class="composite">
+        Test unomi
+        
+        <div id="var1" style="display: none">
+            You have been there for more than 5s
+        </div>
+        
+        <div id="var2" style="display: none">
+            Welcome
+        </div>
+        
+        <script type="text/javascript">
+            unomiTracker.personalize({
+                                     "id": "testPersonalization",
+                                     "strategy": "matching-first",
+                                     "strategyOptions": {"fallback": "var2"},
+                                     "contents": [{
+                                                  "id": "var1",
+                                                  "filters": [{
+                                                              "condition": {
+                                                              "parameterValues": {"minimumDuration": 5, "maximumDuration": 360000},
+                                                              "type": "sessionDurationCondition"
+                                                              }
+                                                              }]
+                                                  },  {
+                                                  "id": "var2"
+                                                  }]
+                                     }, function(res) {
+                                     console.log(res);
+                                     document.getElementById(res[0]).style.display = 'block';
+                                     });
+            </script>
+        
+    </body>
+</html>
