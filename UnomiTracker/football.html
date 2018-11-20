@@ -20,7 +20,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Unomi Tracker Site - Home</title>
+<title>Unomi Tracker Site - Football</title>
 
 <meta name="Date-Revision-yyyymmdd" content="20180919" />
 <meta http-equiv="Content-Language" content="en" />
@@ -72,63 +72,59 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Fontawesome CSS CDN -->
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-	integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-	crossorigin="anonymous">
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+		crossorigin="anonymous">
 
-	<!-- Custom styles for this template -->
-	<link href="css/unomi.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="css/unomi.css" rel="stylesheet">
 
-		<script src="https://code.jquery.com/jquery-3.3.1.js"
-			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-			crossorigin="anonymous">
-			
-		</script>
+			<script src="https://code.jquery.com/jquery-3.3.1.js"
+				integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+				crossorigin="anonymous">
+				
+			</script>
 
-		<script>
-			$(function() {
-				$("header").load("header.html");
-				$("footer").load("footer.html");
-			});
-		</script>
+			<script>
+				$(function() {
+					$("header").load("header.html");
+					$("footer").load("footer.html");
+				});
+			</script>
 </head>
 <body class="composite">
 	<header></header>
 	<div class="container">
-		<main style="margin-top:8px;"> Test unomi
+		<main style="margin-top:8px;">
 
-		<div id="var1" style="display: none">You have been there for
-			more than 5s</div>
+		<p>Football page</p>
 
-		<div id="var2" style="display: none">Welcome</div>
+		<div id="tagsList" style="margin-top: 8px;">
+			This page has tags:
+			<ul>
+				<li class="tag">sport</li>
+				<li class="tag">football</li>
+			</ul>
+		</div>
 
-		<script type="text/javascript">
-			unomiTracker.personalize({
-				"id" : "testPersonalization",
-				"strategy" : "matching-first",
-				"strategyOptions" : {
-					"fallback" : "var2"
-				},
-				"contents" : [ {
-					"id" : "var1",
-					"filters" : [ {
-						"condition" : {
-							"parameterValues" : {
-								"minimumDuration" : 5,
-								"maximumDuration" : 360000
-							},
-							"type" : "sessionDurationCondition"
-						}
-					} ]
-				}, {
-					"id" : "var2"
-				} ]
-			}, function(res) {
-				console.log(res);
-				document.getElementById(res[0]).style.display = 'block';
-			});
-		</script> </main>
+		<div id="categoriesList" style="margin-top: 8px;">
+			This page belongs to categories:
+			<ul>
+				<li class="category">football</li>
+			</ul>
+		</div>
+
+		<div id="interestsList" style="margin-top: 8px;">
+			This page relates to interests:
+			<ul>
+				<li class="interest">football</li>
+				<li class="interest">ball sport</li>
+			</ul>
+		</div>
+
+
+		</main>
 	</div>
 </body>
 </html>
