@@ -30,6 +30,20 @@
 		scope : 'unomiTrackerSite',
 		url : 'https://rangers.jahia.com'
 	};
+	var properties = {
+		path : location.pathname,
+		pageInfo : {
+			destinationURL : location.href,
+			tags : [ "sport", "basketball" ],
+			categories : [ "basketball" ],
+			language : "en"
+		},
+		interests : {
+			"basketball" : 1,
+			"ball sport" : 1
+		}
+	};
+	console.log(properties);
 	window.unomiTracker || (window.unomiTracker = {}), function() {
 		function e(e) {
 			for (unomiTracker.initialize({
@@ -64,7 +78,7 @@
 			var r = document.getElementsByTagName("script")[0];
 			r.parentNode.insertBefore(n, r)
 		}, document.addEventListener("DOMContentLoaded", unomiTracker.load),
-				unomiTracker.page()
+				unomiTracker.page(properties)
 	}();
 </script>
 

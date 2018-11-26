@@ -66,6 +66,12 @@
 		}, document.addEventListener("DOMContentLoaded", unomiTracker.load),
 				unomiTracker.page()
 	}();
+	window.addEventListener("load", function() {
+		var form = document.getElementById('testFormTracking');
+		unomiTracker.trackForm(form, 'formSubmitted', {
+			formName : form.name
+		});
+	});
 </script>
 
 <!-- Bootstrap core CSS -->
@@ -100,16 +106,13 @@
 
 		<p>Form page</p>
 
-		<form>
-			<p>
-				First name: <input type="text" name="firstname"></input>
-			</p>
-			<p>
-				Last name: <input type="text" name="lastname">
-			</p>
-			<p>
-				<input type="submit">
-			</p>
+		<form id="testFormTracking" action="#" name="testFormTracking">
+			<label for="firstName">First name</label> <input type="text"
+				id="firstName" name="firstName" value="John" /> <label
+				for="lastName">Last name</label> <input type="text" id="lastName"
+				name="lastName" value="Doe" /> <label for="email">Email</label> <input
+				type="email" id="email" name="email" value="johndoe@acme.com" /> <input
+				type="submit" name="submitButton" value="Submit" />
 		</form>
 
 		<!-- 
