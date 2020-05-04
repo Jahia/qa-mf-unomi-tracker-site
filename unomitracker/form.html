@@ -28,8 +28,15 @@
 <script type="text/javascript">
 	var unomiOption = {
 		scope : 'unomiTrackerSite',
-		url : 'https://rangers.jahia.com'
+		url : 'https://rangers.jahia.com',
+		initialPageProperties : {
+			path : location.pathname,
+			pageInfo : {
+				destinationURL : location.href,
+			}
+		}
 	};
+	console.log(unomiOption);
 	window.unomiTracker || (window.unomiTracker = {}), function() {
 		function e(e) {
 			for (unomiTracker.initialize({
@@ -64,7 +71,7 @@
 			var r = document.getElementsByTagName("script")[0];
 			r.parentNode.insertBefore(n, r)
 		}, document.addEventListener("DOMContentLoaded", unomiTracker.load),
-				unomiTracker.page()
+				unomiTracker.page(unomiOption.initialPageProperties)
 	}();
 	window.addEventListener("load", function() {
 		var form = document.getElementById('testFormTracking');

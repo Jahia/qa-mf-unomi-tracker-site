@@ -28,21 +28,21 @@
 <script type="text/javascript">
 	var unomiOption = {
 		scope : 'unomiTrackerSite',
-		url : 'https://rangers.jahia.com'
-	};
-	var properties = {
-		path : location.pathname,
-		pageInfo : {
-			destinationURL : location.href,
-			tags : [ "sport", "golf" ],
-			categories : [ "golf" ]
-		},
-		interests : {
-			"golf" : 1,
-			"rich men sport" : 1
+		url : 'https://rangers.jahia.com',
+		initialPageProperties : {
+			path : location.pathname,
+			pageInfo : {
+				destinationURL : location.href,
+				tags : [ "sport", "golf" ],
+				categories : [ "golf" ]
+			},
+			interests : {
+				"golf" : 1,
+				"rich men sport" : 1
+			}
 		}
 	};
-	console.log(properties);
+	console.log(unomiOption);
 	window.unomiTracker || (window.unomiTracker = {}), function() {
 		function e(e) {
 			for (unomiTracker.initialize({
@@ -77,7 +77,7 @@
 			var r = document.getElementsByTagName("script")[0];
 			r.parentNode.insertBefore(n, r)
 		}, document.addEventListener("DOMContentLoaded", unomiTracker.load),
-				unomiTracker.page(properties)
+				unomiTracker.page(unomiOption.initialPageProperties)
 	}();
 </script>
 
