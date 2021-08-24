@@ -1,0 +1,48 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@0.5.20
+  jahia-modules-orb: jahia/jahia-modules-orb@dev:alpha
+
+parameters:
+  PRIMARY_RELEASE_BRANCH:
+    type: string
+    default: "master" # main or master ? set the branch for the main release
+
+jobs:
+  build_publish:
+    docker:
+      - image: cimg/openjdk:8.0.275
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to Docker Hub
+          command: docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
+      # When working in a branch, those changes are pushed only to a tag corresponding to that branch
+      # "latest" is only creating when pushing to the primary release branch
+      - run:
+          name: Build and push Docker image
+          command: |
+            if [[ "${CIRCLE_BRANCH}" != "<< pipeline.parameters.PRIMARY_RELEASE_BRANCH >>" ]]; then
+              export TESTS_IMAGE="jahia/qa-mf-unomi-tracker-site:${CIRCLE_BRANCH}"
+            fi
+            docker build -t ${TESTS_IMAGE} .
+      - run:
+          name: Push docker image
+          command: |
+            if [[ "${CIRCLE_BRANCH}" != "<< pipeline.parameters.PRIMARY_RELEASE_BRANCH >>" ]]; then
+              docker push jahia/qa-mf-unomi-tracker-site:${CIRCLE_BRANCH}
+            else
+              docker push jahia/qa-mf-unomi-tracker-site:latest
+            fi
+
+workflows:
+  version: 2
+  # On code change is executed each time new code is pushed to a branch
+  # Current project configuration in circleci only builds on PR + main, so effectively this is only being executed
+  on-code-change:
+    jobs:
+      - build_publish:
+          context: QA_ENVIRONMENT

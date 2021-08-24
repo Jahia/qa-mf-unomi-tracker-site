@@ -26,9 +26,13 @@
 <meta http-equiv="Content-Language" content="en" />
 
 <script type="text/javascript">
+	var unomiUrl = 'ENV_UNOMI_URL';
+	if (unomiUrl.includes('ENV_UNOMI')) {
+		unomiUrl='https://rangers.int.jahia.com';
+	}
 	var unomiOption = {
 		scope : 'unomiTrackerSite',
-		url : 'https://rangers.int.jahia.com',
+		url : unomiUrl,
 		initialPageProperties : {
 			path : location.pathname,
 			pageInfo : {
