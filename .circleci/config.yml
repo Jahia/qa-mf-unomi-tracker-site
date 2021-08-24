@@ -27,6 +27,8 @@ jobs:
           command: |
             if [[ "${CIRCLE_BRANCH}" != "<< pipeline.parameters.PRIMARY_RELEASE_BRANCH >>" ]]; then
               export TESTS_IMAGE="jahia/qa-mf-unomi-tracker-site:${CIRCLE_BRANCH}"
+            else
+              export TESTS_IMAGE="jahia/qa-mf-unomi-tracker-site:latest"
             fi
             docker build -t ${TESTS_IMAGE} .
       - run:
