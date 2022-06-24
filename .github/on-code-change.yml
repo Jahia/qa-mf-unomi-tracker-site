@@ -1,0 +1,33 @@
+name: On Code Change
+
+on: [push]
+
+env:
+  PRIMARY_RELEASE_BRANCH: master
+
+jobs:
+  build:
+    name: Build and push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Login to Docker Hub
+        shell: bash
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Build and push Docker image
+        shell: bash
+        run: |
+          if [[ "${BRANCH_NAME}" != "${{ env.PRIMARY_RELEASE_BRANCH }}" ]]; then
+            export TESTS_IMAGE="jahia/qa-mf-unomi-tracker-site:${BRANCH_NAME}"
+          else
+            export TESTS_IMAGE="jahia/qa-mf-unomi-tracker-site:latest"
+          fi
+          docker build -t ${TESTS_IMAGE} .
+      - name: Push docker image
+        shell: bash
+        run: |
+          if [[ "${BRANCH_NAME}" != "${{ env.PRIMARY_RELEASE_BRANCH }}" ]]; then
+            docker push jahia/qa-mf-unomi-tracker-site:${BRANCH_NAME}
+          else
+            docker push jahia/qa-mf-unomi-tracker-site:latest
+          fi
