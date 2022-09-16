@@ -82,4 +82,20 @@ Wait for a few seconds for Apache Unomi to start, you can then open up your brow
 ## Testing procedure
 
 Once the environment is started, the tracker can be verified following this procedure:
- - To be updated
+ 
+ **Test1 : page visit increment**
+ In Unomi API check the number of views for index.html
+ Access the website 
+ In Unomi API check the number of views for index.html should have been incremented
+ 
+ **Test2 : categories, tags, interests**
+ In a new private browser, access the website, visit pages "golf", "football", "basketball"
+ In Unomi API check the profile has been created. 
+ The profile should have the tags "sport 3, basketball 1, football 1, golf 1"
+ The profile should have the categories "basketball 1, football 1, golf 1"
+ The profile should have the interests "ball sport 2, rich men sport 1, basketball 1, football 1, golf 1"
+ 
+ **Test3 : form**
+ Access the website page "form"
+ Fill the form
+ Check the new profile, it should contains the firstname, lastname and email setted previously
