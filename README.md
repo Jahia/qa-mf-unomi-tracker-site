@@ -70,12 +70,14 @@ services:
             - 8000:80
 ```
 
-
-Once done, start an Docker container pointing to that environment.
+Save this file as `docker-compose.yml` and from that same folder, execute the following command:
 
 ```bash
-docker run -p 8000:80 -e UNOMI_URL='http://localhost:8181'
+docker-compose up
+
 ```
+
+Wait for a few seconds for Apache Unomi to start, you can then open up your browser at `http://localhost:8000`
 
 ## Testing procedure
 
