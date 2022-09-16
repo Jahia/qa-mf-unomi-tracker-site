@@ -87,12 +87,14 @@ Once the environment is started, the tracker can be verified following this proc
  
  In Unomi API check the number of views for index.html
  
-` request to use : ` 
+` request to use will be like the following (please refer to your unomi url): ` 
 
 ` curl --request POST 'http://localhost:8181/cxs/query/event/target.properties.pageInfo.destinationURL' \
                   -u 'karaf:karaf' \
                   --header 'Content-Type: application/json' \
-                  --data-raw '{"condition": { "type": "sessionPropertyCondition", "parameterValues": { "comparisonOperator": "between", "propertyName": "timeStamp", "propertyValues": [ 1626386400000, 9628779571946 ] } }}' `
+                  --data-raw '{"condition": { "type": "sessionPropertyCondition", "parameterValues": { "comparisonOperator": "between", "propertyName": "timeStamp", "propertyValues": [ 0, 9999999999999 ] } }}' `
+
+` {"_all":849,"_filtered":849, "http://trackersite.jahia.net:19090/index.html":1}%     `
 
  Access the website 
  In Unomi API check the number of views for index.html should have been incremented
@@ -102,11 +104,14 @@ Once the environment is started, the tracker can be verified following this proc
  In a new private browser, access the website, visit pages "golf", "football", "basketball"
  In Unomi API check the profile has been created. 
  
-` request to use : ` 
+` request to use will be like the following (please refer to your unomi url): ` 
+
 ` curl --request POST 'http://localhost:8181/cxs/profiles/search' \
                   -u 'karaf:karaf' \
                   --header 'Content-Type: application/json' \
                   --data-raw '{"text" : "","offset" : 0,"limit" : 1000,"sortby" : "properties.lastName:asc,properties.firstName:desc","condition" : { }}' `
+
+`{"list":[{"itemId":"230165da-87f7-49d3-8fd6-de1b88476593","itemType":"profile","version":5,"properties":{"nbOfVisits":1,"lastVisit":"2022-09-16T12:13:10Z","firstVisit":"2022-09-16T12:13:10Z","pageViewCount":{"JahiaMfIntegTests":4}},"systemProperties":{"lastUpdated":"2022-09-16T12:13:21Z"},"segments":[],"scores":{},"mergedWith":null,"consents":{}}, …} `
 
  The profile should have the tags "sport 3, basketball 1, football 1, golf 1"
  The profile should have the categories "basketball 1, football 1, golf 1"
