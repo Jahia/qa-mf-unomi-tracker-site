@@ -89,12 +89,12 @@ Once the environment is started, the tracker can be verified following this proc
  
 ` request to use will be like the following (please refer to your unomi url): ` 
 
-```
+```bash
 curl --request POST 'http://localhost:8181/cxs/query/event/target.properties.pageInfo.destinationURL' \
    -u 'karaf:karaf' \
    --header 'Content-Type: application/json' \
    --data-raw '{"condition": { "type": "sessionPropertyCondition", "parameterValues": { "comparisonOperator": "between", "propertyName": "timeStamp", "propertyValues": [ 0, 9999999999999 ] } }}' 
-                  ```
+```
 
 ` {"_all":849,"_filtered":849, "http://trackersite.jahia.net:19090/index.html":1}%     `
 
