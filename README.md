@@ -108,10 +108,8 @@ Then check again the number of views using the previous `curl` request, the numb
  
  In a new private browser, access the website at `http://localhost:8000`, then visit the pages "golf", "football" and "basketball".
 
- Next, check in Unomi if a user profile has been created using the following `curl` request.
+ Next, check in Unomi if a user profile has been created using the following `curl` request:
  
-` request to use will be like the following (please refer to your unomi url): ` 
-
 ``` bash 
 curl --request POST 'http://localhost:8181/cxs/profiles/search' \
     -u 'karaf:karaf' \
