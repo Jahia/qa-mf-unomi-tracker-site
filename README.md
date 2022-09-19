@@ -97,7 +97,7 @@ curl --request POST 'http://localhost:8181/cxs/query/event/target.properties.pag
 PS: Update the URL and credentials according to your environment.
 
 ```json
- {"_all":849,"_filtered":849, "http://trackersite.jahia.net:19090/index.html":1}%     
+ {"_all":849,"_filtered":849, "http://trackersite.jahia.net:19090/index.html":1}    
 ```
 
 Next, access the website at `http://localhost:8000`
