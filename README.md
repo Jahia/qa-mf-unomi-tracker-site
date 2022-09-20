@@ -82,4 +82,56 @@ Wait for a few seconds for Apache Unomi to start, you can then open up your brow
 ## Testing procedure
 
 Once the environment is started, the tracker can be verified following this procedure:
- - To be updated
+ 
+### Test1 : page visit increment
+ 
+ In Unomi API check the number of views for index.html, this can be done using the following `curl` request: 
+
+```bash
+curl --request POST 'http://localhost:8181/cxs/query/event/target.properties.pageInfo.destinationURL' \
+   -u 'karaf:karaf' \
+   --header 'Content-Type: application/json' \
+   --data-raw '{"condition": { "type": "sessionPropertyCondition", "parameterValues": { "comparisonOperator": "between", "propertyName": "timeStamp", "propertyValues": [ 0, 9999999999999 ] } }}' 
+```
+
+PS: Update the URL and credentials according to your environment.
+
+```json
+ {"_all":849,"_filtered":849, "http://trackersite.jahia.net:19090/index.html":1}    
+```
+
+Next, access the website at `http://localhost:8000`
+
+Then check again the number of views using the previous `curl` request, the number (previously `849`) should have been incremented.
+ 
+### Test2 : categories, tags, interests
+ 
+ In a new private browser, access the website at `http://localhost:8000`, then visit the pages "golf", "football" and "basketball".
+
+ Next, check in Unomi if a user profile has been created using the following `curl` request:
+ 
+``` bash 
+curl --request POST 'http://localhost:8181/cxs/profiles/search' \
+    -u 'karaf:karaf' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{"text" : "","offset" : 0,"limit" : 1000,"sortby" : "properties.lastName:asc,properties.firstName:desc","condition" : { }}' 
+```
+
+PS: Update the URL and credentials according to your environment.
+
+```json
+{"list":[{"itemId":"230165da-87f7-49d3-8fd6-de1b88476593","itemType":"profile","version":5,"properties":{"nbOfVisits":1,"lastVisit":"2022-09-16T12:13:10Z","firstVisit":"2022-09-16T12:13:10Z","pageViewCount":{"JahiaMfIntegTests":4}},"systemProperties":{"lastUpdated":"2022-09-16T12:13:21Z"},"segments":[],"scores":{},"mergedWith":null,"consents":{}}, …} 
+```
+
+ The profile should have:
+  * the tags "sport 3, basketball 1, football 1, golf 1"
+  * the categories "basketball 1, football 1, golf 1"
+  * the interests "ball sport 2, rich men sport 1, basketball 1, football 1, golf 1"
+ 
+### Test3 : form
+ 
+Follow this procedure:
+
+ * Access the website page "form"
+ * Fill the form
+ * Check the new profile, it should contains the firstname, lastname and email setted previously
