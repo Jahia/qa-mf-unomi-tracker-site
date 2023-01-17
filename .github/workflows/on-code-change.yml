@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@v5.2
+        uses: tj-actions/branch-names@v6
       - name: Define image tag
         shell: bash
         run: |
