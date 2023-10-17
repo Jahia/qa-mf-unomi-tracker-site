@@ -18,7 +18,7 @@ networks:
 
 services:
     elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.14
+        image: jahia/elasticsearch:7
         networks:
             - unomi-net
         environment:
