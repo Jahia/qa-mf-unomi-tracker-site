@@ -60,7 +60,7 @@ services:
             - 8102:8102
 
     trackersite:
-        image:  jahia/qa-mf-unomi-tracker-site:latest
+        image:  ghcr.io/jahia/qa-mf-unomi-tracker-site:latest
         mem_limit: 2gb
         environment:
             UNOMI_URL: http://localhost:8181
