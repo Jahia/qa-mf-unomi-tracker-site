@@ -18,7 +18,7 @@ networks:
 
 services:
     elasticsearch:
-        image: jahia/elasticsearch:7
+        image: ghcr.io/jahia/elasticsearch:7
         networks:
             - unomi-net
         environment:
